@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c08b7ebfc4ad4765580724e6a73904f7fba6df324765d9229a01bd4fd0c278e6"
+            "sha256": "2d4112d2ec9cf1d74ecb76a7a84febdf8452c843ac03218588fe55bfa86e208d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,46 @@
             ],
             "index": "pypi",
             "version": "==2.1.5"
+        },
+        "django-crispy-forms": {
+            "hashes": [
+                "sha256:5952bab971110d0b86c278132dae0aa095beee8f723e625c3d3fa28888f1675f",
+                "sha256:705ededc554ad8736157c666681165fe22ead2dec0d5446d65fc9dd976a5a876"
+            ],
+            "index": "pypi",
+            "version": "==1.7.2"
+        },
+        "django-thumbnail-maker": {
+            "hashes": [
+                "sha256:cc355e988b32f9e90a72ef1fd20c9bc25e483324781115e689031cabadd41edf",
+                "sha256:ec67c1fff671734dd491baba1a7d11b6e6ec9ed743315c0870996ea20d79fe18",
+                "sha256:faa6e1427824cf83299a93da3481e04d5baf4fd7f4b80b75a16d7704d9eccb3c"
+            ],
+            "index": "pypi",
+            "version": "==0.0.6"
+        },
+        "exifread": {
+            "hashes": [
+                "sha256:4aa9d227db5c4cd65d87520076140a6f84e33363e08e649b87c7afec6bab60ab",
+                "sha256:79e244f2eb466709029e8806fe5e2cdd557870c3db5f68954db0ef548d9320ad"
+            ],
+            "index": "pypi",
+            "version": "==2.1.2"
+        },
+        "gpsphoto": {
+            "hashes": [
+                "sha256:7bd6478e48cea35129cfa8246dbf8a62eb9b49b684ee1bca687df633e4fd920e"
+            ],
+            "index": "pypi",
+            "version": "==2.2.2"
+        },
+        "piexif": {
+            "hashes": [
+                "sha256:22e40356e4b4d5069787caa010ae77779c7cf8fc875ba43103ded2a2fc7b0c5f",
+                "sha256:60cd973f7b5a6d999c3bb60b784745c8d5345486ef62708ffdc5cc4a78e44636"
+            ],
+            "index": "pypi",
+            "version": "==1.1.2"
         },
         "pillow": {
             "hashes": [
@@ -66,6 +106,14 @@
                 "sha256:d747dd3d23d77ef44c6a3526e274af6efeb0a6f1afd5a69ba4d5be4098c8e141"
             ],
             "version": "==2019.1"
+        },
+        "sorl-thumbnail": {
+            "hashes": [
+                "sha256:8dfe5fda91a5047d1d35a0b9effe7b000764a01d648e15ca076f44e9c34b6dbd",
+                "sha256:d9e3f018d19293824803e4ffead96b19dfcd44fa7987cea392f50436817bef34"
+            ],
+            "index": "pypi",
+            "version": "==12.5.0"
         }
     },
     "develop": {}

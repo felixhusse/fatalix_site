@@ -8,6 +8,12 @@ verify_ssl = true
 [packages]
 django = "==2.1.5"
 pillow = "==5.4.1"
+gpsphoto = "*"
+exifread = "*"
+piexif = "*"
+django-crispy-forms = "*"
+sorl-thumbnail = "*"
+django-thumbnail-maker = "*"
 
 [requires]
 python_version = "3.7"
