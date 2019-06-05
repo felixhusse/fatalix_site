@@ -1,0 +1,11 @@
+*.pyc
+*~
+__pycache__
+myvenv
+db.sqlite3
+/static
+/media
+/reiseblog/migrations
+PipFile
+PipFile.*
+.DS_Store

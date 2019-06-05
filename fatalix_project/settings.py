@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sorl.thumbnail',
+    'crispy_forms',
+    'thumbnail_maker',
     'reiseblog',
     'rootsite',
 ]
@@ -115,8 +118,20 @@ USE_L10N = True
 
 USE_TZ = True
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_REDIRECT_URL = 'reise/admin/trip/upload'
+
+THUMBNAIL_MAKER_FORMATS = {
+    'photo_small':   ('300x300', {'crop': 'center',
+                             'quality': 90}),
+}

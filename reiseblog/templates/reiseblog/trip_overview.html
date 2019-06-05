@@ -1,0 +1,41 @@
+{% extends 'reiseblog/base.html' %}
+{% block content %}
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Reise Übersicht</h1>
+      <p class="lead text-muted">Hier alle unsere Trips nach und zu von und hin</p>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {% for trip in trips %}
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>{{trip.title}}</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text">{{trip.title}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="{% url 'trip_detail' pk=trip.pk %}" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="http://google.com" class="btn btn-sm btn-outline-secondary">Edit</a>
+                  </div>
+                  <small class="text-muted">{{trip.trip_date}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+
+{% endblock %}
