@@ -11,13 +11,15 @@ from .services import PhotoService, TripService
 
 
 # Create your views here.
+@login_required
 def trip_overview(request):
     trips = Trip.objects.order_by('trip_date')
     return render(request, 'reiseblog/trip_overview.html', {'trips':trips})
 
+@login_required
 def trip_detail(request,pk):
     trip = get_object_or_404(Trip, pk=pk)
-    photo_list = trip.photo_set.all().order_by('photo_taken')
+    photo_list = trip.photo_set.all().order_by('photo_taken').reverse()
     page = request.GET.get('page', 1)
     paginator = Paginator(photo_list, 25)
     try:

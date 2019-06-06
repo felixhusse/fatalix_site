@@ -45,7 +45,15 @@ footer p {
 
 .trip-avatar {
   vertical-align: middle;
-  width: 75px;
-  height: 75px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
+}
+
+.trip-title {
+
+}
+
+.trip-item {
+  margin: 10px;
 }
