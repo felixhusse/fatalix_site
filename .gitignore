@@ -6,6 +6,5 @@ db.sqlite3
 /static
 /media
 /reiseblog/migrations
-PipFile
-PipFile.*
+Pipfile.lock
 .DS_Store
