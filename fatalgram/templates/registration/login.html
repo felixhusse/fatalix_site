@@ -1,0 +1,21 @@
+{% extends "fatalixgram/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    <div class="row justify-content-center">
+        <div class="col-6">
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.username |as_crispy_field}}
+            {{ form.password |as_crispy_field}}
+            <input type="submit" value="login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+          </form>
+        </div>
+    </div>
+
+{% endblock %}
