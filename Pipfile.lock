@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "52767bde4efc3a0a8789d7b09482e1e7b7335b75fd9f0690966c3a77d830bdff"
+            "sha256": "d0d2a2b4fc6d9e46f6b9345bbf56ace7ca1511974881fb8209930816fef51f0a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,11 +18,11 @@
     "default": {
         "django": {
             "hashes": [
-                "sha256:a32c22af23634e1d11425574dce756098e015a165be02e4690179889b207c7a8",
-                "sha256:d6393918da830530a9516bbbcbf7f1214c3d733738779f06b0f649f49cc698c3"
+                "sha256:753d30d3eb078064d2ddadfea65083c9848074a7f93d7b4dc7fa6b1380d278f5",
+                "sha256:7cb67e8b934fab23b6daed7144da52e8a25a47eba7f360ca43d2b448506b01ad"
             ],
             "index": "pypi",
-            "version": "==2.1.5"
+            "version": "==2.2.2"
         },
         "django-crispy-forms": {
             "hashes": [
@@ -39,15 +39,6 @@
             ],
             "index": "pypi",
             "version": "==1.1.0"
-        },
-        "django-thumbnail-maker": {
-            "hashes": [
-                "sha256:cc355e988b32f9e90a72ef1fd20c9bc25e483324781115e689031cabadd41edf",
-                "sha256:ec67c1fff671734dd491baba1a7d11b6e6ec9ed743315c0870996ea20d79fe18",
-                "sha256:faa6e1427824cf83299a93da3481e04d5baf4fd7f4b80b75a16d7704d9eccb3c"
-            ],
-            "index": "pypi",
-            "version": "==0.0.6"
         },
         "exifread": {
             "hashes": [
@@ -115,13 +106,12 @@
             ],
             "version": "==2019.1"
         },
-        "sorl-thumbnail": {
+        "sqlparse": {
             "hashes": [
-                "sha256:8dfe5fda91a5047d1d35a0b9effe7b000764a01d648e15ca076f44e9c34b6dbd",
-                "sha256:d9e3f018d19293824803e4ffead96b19dfcd44fa7987cea392f50436817bef34"
+                "sha256:40afe6b8d4b1117e7dff5504d7a8ce07d9a1b15aeeade8a2d10f130a834f8177",
+                "sha256:7c3dca29c022744e95b547e867cee89f4fce4373f3549ccd8797d8eb52cdb873"
             ],
-            "index": "pypi",
-            "version": "==12.5.0"
+            "version": "==0.3.0"
         }
     },
     "develop": {}
