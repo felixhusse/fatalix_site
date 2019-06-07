@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'taggit',
     'crispy_forms',
-    'thumbnail_maker',
-    'reiseblog',
     'fatalgram',
     'rootsite',
 ]
