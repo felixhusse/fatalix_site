@@ -15,4 +15,4 @@ django-crispy-forms = "*"
 django-taggit = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3"
