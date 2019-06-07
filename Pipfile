@@ -13,6 +13,7 @@ exifread = "*"
 piexif = "*"
 django-crispy-forms = "*"
 django-taggit = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3"
