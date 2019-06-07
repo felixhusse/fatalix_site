@@ -12,8 +12,6 @@ gpsphoto = "*"
 exifread = "*"
 piexif = "*"
 django-crispy-forms = "*"
-sorl-thumbnail = "*"
-django-thumbnail-maker = "*"
 django-taggit = "*"
 
 [requires]

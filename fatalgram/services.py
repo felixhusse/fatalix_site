@@ -1,20 +1,16 @@
 import os
-import glob
 import shutil
 from os import listdir
 from os.path import isfile, join
-
 from zipfile import ZipFile
-from django.core.files.images import ImageFile
-from django.core.files import File as FileWrapper
-from django.core.files.storage import FileSystemStorage
-from django.core.files.base import ContentFile
-from django.core.files import File
-
 from datetime import datetime
 from PIL import Image, ExifTags,ImageOps
 from GPSPhoto import gpsphoto
-from sorl.thumbnail import get_thumbnail
+
+from django.core.files.images import ImageFile
+from django.core.files.storage import FileSystemStorage
+from django.core.files.base import ContentFile
+from django.core.files import File
 
 from .models import Trip, Photo
 

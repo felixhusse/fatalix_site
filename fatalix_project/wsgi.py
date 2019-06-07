@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fatalix_project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fatalix_project.settings_dev')
 
 application = get_wsgi_application()
