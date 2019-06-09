@@ -1,6 +1,6 @@
 """
 
-code copied from https://gist.github.com/ndarville/3452907 
+code copied from https://gist.github.com/ndarville/3452907
 
 Two things are wrong with Django's default `SECRET_KEY` system:
 1. It is not random but pseudo-random
@@ -10,6 +10,8 @@ This snippet
 2. saves a local `secret.txt`
 The result is a random and safely hidden `SECRET_KEY`.
 """
+import os
+
 try:
     SECRET_KEY
 except NameError:
