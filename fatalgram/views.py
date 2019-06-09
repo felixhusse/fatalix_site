@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect,get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -15,13 +16,14 @@ def home(request):
     trips = Trip.objects.all().order_by('trip_start').reverse()
     web_trips = []
     for trip in trips:
-        covers = trip.photo_set.all()[:1]
-        web_trip = {'title':trip.title,
-                    'trip_start':trip.trip_start,
-                    'trip_end':trip.trip_end,
-                    'cover':covers[0].photo_thumb.url,
-                    'pk':trip.pk}
-        web_trips.append(web_trip)
+        if trip.photo_set.count() > 0:
+            covers = trip.photo_set.all()[:1]
+            web_trip = {'title':trip.title,
+                        'trip_start':trip.trip_start,
+                        'trip_end':trip.trip_end,
+                        'cover':covers[0].photo_thumb.url,
+                        'pk':trip.pk}
+            web_trips.append(web_trip)
 
 
     page = request.GET.get('page', 1)
@@ -69,7 +71,12 @@ def admin_process(request):
         trip_id = request.POST.get('trip_id')
         trip = get_object_or_404(Trip, pk=trip_id)
         photoService = PhotoService()
-        result = photoService.processZipFile(trip=trip,photozip=settings.MEDIA_ROOT + "/fatalgram/temp/archive.zip",user=request.user)
+        result = "processed files:"
+        for dirName, subdirList, fileList in os.walk(settings.MEDIA_ROOT + "/fatalgram/temp"):
+            for fname in fileList:
+                if ".zip" in fname:
+                    result = result + ","+fname
+                    photoService.processZipFile(trip=trip,photozip=os.path.join(dirName, fname),user=request.user)
         return render(request, 'fatalgram/admin/process.html', {"result":result})
 
     return render(request, 'fatalgram/admin/process.html', {})
