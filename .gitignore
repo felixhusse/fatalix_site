@@ -6,3 +6,4 @@ fatalix-site
 db.sqlite3
 /static
 .DS_Store
+secret.txt
