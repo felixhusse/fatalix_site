@@ -62,3 +62,14 @@ def admin_upload(request):
         return render(request, 'fatalgram/admin/upload.html', {'uploaded_file_url': uploaded_file_url, "result":result})
 
     return render(request, 'fatalgram/admin/upload.html', {})
+
+@login_required
+def admin_process(request):
+    if request.method == 'POST':
+        trip_id = request.POST.get('trip_id')
+        trip = get_object_or_404(Trip, pk=trip_id)
+        photoService = PhotoService()
+        result = photoService.processZipFile(trip=trip,photozip=settings.MEDIA_ROOT + "/fatalgram/temp/archive.zip",user=request.user)
+        return render(request, 'fatalgram/admin/process.html', {"result":result})
+
+    return render(request, 'fatalgram/admin/process.html', {})
