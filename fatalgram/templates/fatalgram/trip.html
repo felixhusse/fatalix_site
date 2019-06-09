@@ -1,0 +1,36 @@
+{% extends 'fatalgram/base.html' %}
+
+{% block content %}
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">{{trip.title}}</h1>
+      <p class="lead text-muted">{{trip.summary}}</p>
+    </div>
+  </section>
+
+  <div class="infinite-container photo-grid">
+    {% for photo in photos %}
+      <div class="infinite-item">
+          <a href="{{photo.photo_raw.url}}" data-lightbox="{{trip.title}}">
+            <img alt="Card image cap" class="img-thumbnail img-insta" src="{{photo.photo_thumb.url}}" >
+          </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if photos.has_next %}
+    <a class="infinite-more-link" href="?page={{ photos.next_page_number }}">More</a>
+  {% endif %}
+
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0]
+    });
+  </script>
+
+</main>
+
+
+{% endblock %}
