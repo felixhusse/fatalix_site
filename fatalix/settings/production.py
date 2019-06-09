@@ -9,4 +9,4 @@ with open('secret.txt') as f:
 
 
 # SECURITY WARNING: update this when you have the production host
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
