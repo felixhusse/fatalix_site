@@ -1,0 +1,12 @@
+[Unit]
+Description=fatalix daemon
+After=network.target
+
+[Service]
+User=felix
+Group=psaserv
+WorkingDirectory=/opt/fatalix-site
+ExecStart=/opt/fatalix-site/fatalix-site/bin/gunicorn --access-logfile - --workers 3 --bind unix:/opt/fatalix-site/myproject.sock fatalix.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

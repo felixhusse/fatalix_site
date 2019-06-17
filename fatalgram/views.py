@@ -7,6 +7,8 @@ from django.conf import settings
 
 from .services import PhotoService
 from .models import Photo, Trip
+from .tasks import processZipFile
+
 
 # Create your views here.
 
@@ -68,6 +70,7 @@ def admin_upload(request):
 @login_required
 def admin_process(request):
     if request.method == 'POST':
+        user_id = request.user.id
         trip_id = request.POST.get('trip_id')
         trip = get_object_or_404(Trip, pk=trip_id)
         photoService = PhotoService()
@@ -76,7 +79,7 @@ def admin_process(request):
             for fname in fileList:
                 if ".zip" in fname:
                     result = result + ","+fname
-                    photoService.processZipFile(trip=trip,photozip=os.path.join(dirName, fname),user=request.user)
+                    processZipFile.delay(trip_id=trip_id,photozip=os.path.join(dirName, fname),user_id=user_id)
         return render(request, 'fatalgram/admin/process.html', {"result":result})
 
     return render(request, 'fatalgram/admin/process.html', {})

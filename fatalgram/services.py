@@ -11,19 +11,19 @@ from django.core.files.images import ImageFile
 from django.core.files.storage import FileSystemStorage
 from django.core.files.base import ContentFile
 from django.core.files import File
+import tempfile
 
 from .models import Trip, Photo
 
 class PhotoService():
 
     def processZipFile(self, trip, photozip, user):
-        extractPath = os.path.dirname(photozip)+"/extract"
-        with ZipFile(photozip, 'r') as zippedImgs:
-            for filename in zippedImgs.namelist():
-                if ("MACOSX" not in filename and (".jpg" in filename or ".JPG" in filename)):
-                    zippedImgs.extract(filename, path=extractPath)
-        self.importFolder(trip=trip, photo_folder=extractPath, user=user)
-        shutil.rmtree(extractPath)
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            with ZipFile(photozip, 'r') as zippedImgs:
+                for filename in zippedImgs.namelist():
+                    if ("MACOSX" not in filename and (".jpg" in filename or ".JPG" in filename)):
+                        zippedImgs.extract(filename, path=tmpdirname)
+            self.importFolder(trip=trip, photo_folder=tmpdirname, user=user)
         os.remove(photozip)
         return
 
