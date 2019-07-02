@@ -128,7 +128,7 @@ SOCIAL_AUTH_TWITTER_SECRET=config('SOCIAL_AUTH_TWITTER_SECRET')
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'fatalix.de']
 
 # Setup support for proxy headers
 USE_X_FORWARDED_HOST = True
