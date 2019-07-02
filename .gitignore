@@ -6,6 +6,8 @@ fatalix-site
 db.sqlite3
 /static
 .DS_Store
+.env
 secret.txt
 fatalix/media
+media
 dump.rdb

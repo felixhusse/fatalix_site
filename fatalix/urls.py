@@ -32,6 +32,7 @@ urlpatterns = [
     path('fatalgram/', include('fatalgram.urls')),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.LogoutView.as_view(next_page='/'), name='logout'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^%s(?P<path>.*)$' % settings.MEDIA_URL[1:], protected_serve, {'document_root': settings.MEDIA_ROOT}),
 ]
 
