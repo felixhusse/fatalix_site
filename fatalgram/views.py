@@ -1,13 +1,25 @@
 import os
+import tempfile
+
 from django.shortcuts import render, redirect,get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from rest_framework.decorators import api_view,parser_classes
+from rest_framework.response import Response
+from rest_framework import permissions
+from rest_framework.parsers import JSONParser, FileUploadParser
+from rest_framework import generics
 
 from .services import PhotoService
 from .models import Photo, Trip
-from .tasks import processZipFile
+from .tasks import processZipFile, processPhoto
+from .serializers import TripSerializer, PhotoSerializer
+
 
 
 # Create your views here.
@@ -83,3 +95,67 @@ def admin_process(request):
         return render(request, 'fatalgram/admin/process.html', {"result":result})
 
     return render(request, 'fatalgram/admin/process.html', {})
+
+@api_view(['GET','POST'])
+def trip_list(request):
+    if request.method == 'GET':
+        trips = Trip.objects.all()
+        serializer = TripSerializer(trips, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = TripSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+@api_view(['GET','POST'])
+def trip_detail(request, pk):
+    try:
+        trip = Trip.objects.get(pk=pk)
+    except Trip.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = TripSerializer(trip)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = TripSerializer(trip, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        trip.delete()
+        return Response(status=204)
+
+@api_view(['PUT'])
+@parser_classes((FileUploadParser,))
+def photo_upload(request, trip_pk, filename):
+    photoUpload = request.FILES['file']
+    filename = settings.MEDIA_ROOT+'/fatalgram/temp/'+photoUpload.name
+    with open(filename, 'wb+') as temp_file:
+        for chunk in photoUpload.chunks():
+            temp_file.write(chunk)
+        processPhoto.delay(trip_id=trip_pk,photo_path=filename,user_id=request.user.id)
+    return Response(status=204)
+
+
+@api_view(['GET','POST'])
+def photo_list(request,pk):
+    if request.method == 'GET':
+        trip = get_object_or_404(Trip, pk=pk)
+        photo_list = trip.photo_set.all().order_by('photo_taken')
+        serializer = PhotoSerializer(photo_list, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = PhotoSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)

@@ -10,12 +10,15 @@ from .services import PhotoService
 
 
 @shared_task
-def add(x, y):
-    return x + y
-
-@shared_task
 def processZipFile(trip_id, photozip, user_id):
     trip = Trip.objects.get(pk=trip_id)
     user = User.objects.get(pk=user_id)
     photoService = PhotoService()
     return photoService.processZipFile(trip=trip,photozip=photozip,user=user)
+
+@shared_task
+def processPhoto(trip_id,photo_path,user_id):
+    trip = Trip.objects.get(pk=trip_id)
+    user = User.objects.get(pk=user_id)
+    photoService = PhotoService()
+    return photoService.processPhoto(photo_path=photo_path, trip=trip, user=user)

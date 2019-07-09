@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'taggit',
     'crispy_forms',
     'social_django',
+    'rest_framework',
     'fatalgram',
     'rootsite',
 ]
@@ -146,6 +147,18 @@ MEDIA_ROOT = os.path.join(config('BASE_DIR'), 'media')
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
 # CELERY STUFF
 CELERY_BROKER_URL = 'redis://localhost:6379'
