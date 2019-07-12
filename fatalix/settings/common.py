@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from decouple import config
+from decouple import config, Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -129,7 +129,7 @@ SOCIAL_AUTH_TWITTER_SECRET=config('SOCIAL_AUTH_TWITTER_SECRET')
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'fatalix.de']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Setup support for proxy headers
 USE_X_FORWARDED_HOST = True
