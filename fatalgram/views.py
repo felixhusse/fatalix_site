@@ -53,9 +53,15 @@ def home(request):
 @login_required
 def trip_view(request,pk):
     trip = get_object_or_404(Trip, pk=pk)
+
+    if request.GET.get('delete'):
+        photoService = PhotoService()
+        photoService.deletePhoto(request.GET.get('delete'))
+
     photo_list = trip.photo_set.all().order_by('photo_taken')
     page = request.GET.get('page', 1)
     paginator = Paginator(photo_list, 25)
+
     try:
         photos = paginator.page(page)
     except PageNotAnInteger:

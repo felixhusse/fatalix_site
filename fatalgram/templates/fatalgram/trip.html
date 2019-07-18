@@ -13,9 +13,15 @@
   <div class="infinite-container photo-grid">
     {% for photo in photos %}
       <div class="infinite-item">
-          <a href="{{photo.photo_raw.url}}" data-lightbox="{{trip.title}}">
-            <img alt="Card image cap" class="img-thumbnail img-insta" src="{{photo.photo_thumb.url}}" >
-          </a>
+          <div class="photo-container">
+            <a href="{{photo.photo_raw.url}}" data-lightbox="{{trip.title}}">
+              <img alt="Card image cap" class="img-thumbnail img-insta" src="{{photo.photo_thumb.url}}" >
+            </a>
+            {% if user == photo.author %}
+              <a class="btn btn-secondary btn-sm" href="?delete={{photo.pk}}">delete</a>
+            {% endif %}
+          </div>
+
       </div>
     {% endfor %}
   </div>

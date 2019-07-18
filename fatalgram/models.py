@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from taggit.managers import TaggableManager
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 def path_raw(instance, filename):
     return 'fatalgram/user_{id}/raw/{filename}'.format(id=instance.author.username, filename=filename)
@@ -41,3 +43,8 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.description
+
+@receiver(post_delete, sender=Photo)
+def submission_delete(sender, instance, **kwargs):
+    instance.photo_raw.delete(False)
+    instance.photo_thumb.delete(False)

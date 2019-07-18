@@ -17,6 +17,11 @@ from .models import Trip, Photo
 
 class PhotoService():
 
+    def deletePhoto(self, photo_pk):
+        photo = Photo.objects.get(pk=photo_pk)
+        photo.delete()
+        return
+
     def processZipFile(self, trip, photozip, user):
         with tempfile.TemporaryDirectory() as tmpdirname:
             with ZipFile(photozip, 'r') as zippedImgs:
