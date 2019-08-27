@@ -22,17 +22,17 @@
       </div>
     </div>
   </section>
-
-  <div class="infinite-container photo-grid">
-    {% for photo in photos %}
-      <div class="infinite-item">
-          <a href="{{photo.photo_raw.url}}" data-lightbox="{{photo.trip.title}}">
-            <img alt="{{photo.trip.title}}" class="img-thumbnail img-insta" src="{{photo.photo_thumb.url}}" >
-          </a>
-      </div>
-    {% endfor %}
+  <div class="container">
+    <div class="infinite-container photo-grid">
+      {% for photo in photos %}
+          <div class="infinite-item photo-item">
+              <a href="{{photo.photo_raw.url}}" data-lightbox="{{photo.trip.title}}">
+                <img alt="{{photo.trip.title}}" class="photo-image" src="{{photo.photo_thumb.url}}" >
+              </a>
+          </div>
+      {% endfor %}
+    </div>
   </div>
-
   {% if photos.has_next %}
     <a class="infinite-more-link" href="?page={{ photos.next_page_number }}">More</a>
   {% endif %}

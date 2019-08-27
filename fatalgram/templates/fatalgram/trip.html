@@ -9,21 +9,26 @@
       <p class="lead text-muted">{{trip.summary}}</p>
     </div>
   </section>
-
-  <div class="infinite-container photo-grid">
-    {% for photo in photos %}
-      <div class="infinite-item">
-          <div class="photo-container">
+  <div class="container">
+    <div class="infinite-container photo-grid">
+      {% for photo in photos %}
+        <div class="infinite-item photo-item">
             <a href="{{photo.photo_raw.url}}" data-lightbox="{{trip.title}}">
-              <img alt="Card image cap" class="img-thumbnail img-insta" src="{{photo.photo_thumb.url}}" >
+              <img alt="{{trip.title}}" class="photo-image" src="{{photo.photo_thumb.url}}" >
+              {% if user == photo.author %}
+              <div class="photo-item-info">
+      					<ul>
+                  <li class="photo-item-delete"><i class="fas fa-trash-alt" aria-hidden="true"></i>
+                </ul>
+      				</div>
+              {% endif %}
             </a>
-            {% if user == photo.author %}
-              <a class="btn btn-secondary btn-sm" href="?delete={{photo.pk}}">delete</a>
-            {% endif %}
-          </div>
+        </div>
 
-      </div>
-    {% endfor %}
+
+
+      {% endfor %}
+    </div>
   </div>
 
   {% if photos.has_next %}
