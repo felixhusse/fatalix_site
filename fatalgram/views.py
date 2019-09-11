@@ -4,6 +4,7 @@ import tempfile
 from django.shortcuts import render, redirect,get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
@@ -69,6 +70,23 @@ def trip_view(request,pk):
     except EmptyPage:
         photos = paginator.page(paginator.num_pages)
     return render(request, 'fatalgram/trip.html', {'photos': photos, 'trip':trip})
+
+@login_required
+def user_view(request,pk):
+    fataluser = get_object_or_404(User,pk=pk)
+    photo_list = fataluser.photo_set.all().order_by('photo_taken')
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(photo_list, 25)
+
+    try:
+        photos = paginator.page(page)
+    except PageNotAnInteger:
+        photos = paginator.page(1)
+    except EmptyPage:
+        photos = paginator.page(paginator.num_pages)
+
+    return render(request, 'fatalgram/user/user.html', {'photos': photos, 'fataluser':fataluser})
 
 @login_required
 def admin_upload(request):

@@ -30,6 +30,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('rootsite.urls')),
     path('fatalgram/', include('fatalgram.urls')),
+    path('smrty/', include('smrty.urls')),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.LogoutView.as_view(next_page='/'), name='logout'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
